@@ -33,11 +33,11 @@ module.exports = {
 
   strings: {
     stories: {
-      one: "Data Insights",
-      other: "Data Insights",
+      one: "Theme",
+      other: "Themes",
     },
     storiesBanner:
-        "Explore the guided narratives below to learn more about greenhouse gas measurement, changes over time, events and human-related causes and contributions.",
+        "Explore the guided narratives below to learn more about Earth as NASA sees it.",
     dataCatalogBanner:
         "This dashboard is for exploring key datasets that provide insight into greenhouse gas sources, sinks, emissions, fluxes, and events.",
   },
