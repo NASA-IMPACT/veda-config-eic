@@ -7,7 +7,7 @@ module.exports = {
   /**
    * Glob path for the stories.
    */
-  stories: "./stories/*.stories.mdx",
+  stories: "./stories/*.mdx",
 
   // App component and content overrides.
   // See docs/CONFIGURATION.md for more information.
