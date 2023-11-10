@@ -14,7 +14,7 @@ taxonomy:
     values:
       - Climate
 layers:
-  - id: climdex-tmaxxf-access-cm2
+  - id: climdex-tmaxxf-access-cm2-ssp126
     stacCol: climdex-tmaxxf-access-cm2-ssp126
     name: CMIP6 Daily GISS-E2-1-G Near-Surface Air Temperature (ACCESS-CM2 ssp126)
     type: raster
@@ -29,6 +29,15 @@ layers:
       colormap_name: coolwarm
       rescale: 232,312
       maxzoom: 12
+    compare:
+      datasetId: climdex-tmaxxf-access-cm2
+      layerId: climdex-tmaxxf-access-cm2-ssp126
+      mapLabel: |
+        ::js ({ dateFns, datetime, compareDatetime }) => {
+          if (dateFns && datetime && compareDatetime) return `${dateFns.format(datetime, 'yyyy')} VS ${dateFns.format(compareDatetime, 'yyyy')}`;
+        }      
+    analysis:
+      exclude: true
     legend:
       unit: 
         label: K
@@ -42,7 +51,7 @@ layers:
       - '#f2cbb7'
       - '#ee8468'
       - '#b40426'
-  - id: climdex-tmaxxf-access-cm2
+  - id: climdex-tmaxxf-access-cm2-ssp245
     stacCol: climdex-tmaxxf-access-cm2-ssp245
     name: CMIP6 Daily GISS-E2-1-G Near-Surface Air Temperature (ACCESS-CM2 ssp245)
     type: raster
@@ -70,7 +79,7 @@ layers:
       - '#f2cbb7'
       - '#ee8468'
       - '#b40426'      
-  - id: climdex-tmaxxf-access-cm2
+  - id: climdex-tmaxxf-access-cm2-ssp370
     stacCol: climdex-tmaxxf-access-cm2-ssp370
     name: CMIP6 Daily GISS-E2-1-G Near-Surface Air Temperature (ACCESS-CM2 ssp370)
     type: raster
@@ -98,7 +107,7 @@ layers:
       - '#f2cbb7'
       - '#ee8468'
       - '#b40426'
-  - id: climdex-tmaxxf-access-cm2
+  - id: climdex-tmaxxf-access-cm2-ssp585
     stacCol: climdex-tmaxxf-access-cm2-ssp585
     name: CMIP6 Daily GISS-E2-1-G Near-Surface Air Temperature (ACCESS-CM2 ssp585)
     type: raster
