@@ -1,0 +1,73 @@
+---
+id: cmip6-climdex-tmaxxf-access-cm2
+name: 'CMIP6 Climdex Extreme Indices: Annual Number of Days Above XF'
+featured: false
+description: "Annual number of days with a maximum temperature greater than X°F computed from the NASA Earth Exchange Global Daily Downscaled Projections (NEX-GDDP-CMIP6) Project (Model ACCESS-CM2)."
+media:
+  src: ::file ./cmip6-tas.png
+  alt: CMIP6 Climdex TmaxXF Screenshot
+  author:
+    name: NASA
+    url: 
+taxonomy:
+  - name: Topics
+    values:
+      - Climate
+layers:
+  - id: climdex-tmaxxf-access-cm2-ssp126-90
+    stacCol: climdex-tmaxxf-access-cm2-ssp126
+    name: Days Above 90°F (SSP126)
+    type: raster
+    description: "Annual Number of Days Above 86°F (ACCESS-CM2 SSP126)"
+    zoomExtent:
+      - 0
+      - 4
+    sourceParams:
+      assets: tmax_above_90
+      resampling_method: bilinear
+      colormap_name: coolwarm
+      rescale: 0,365
+      maxzoom: 4
+    compare:
+      datasetId: cmip6-climdex-tmaxxf-access-cm2
+      layerId: climdex-tmaxxf-access-cm2-ssp126-90
+      mapLabel: |
+        ::js ({ dateFns, datetime, compareDatetime }) => {
+          if (dateFns && datetime && compareDatetime) return `${dateFns.format(datetime, 'yyyy')} VS ${dateFns.format(compareDatetime, 'yyyy')}`;
+        }      
+    analysis:
+      exclude: false
+    legend:
+      unit: 
+        label: Days
+      type: gradient
+      min: 0
+      max: 365
+      stops:
+      - '#3b4cc0'
+      - '#7b9ff9'
+      - '#c0d4f5'
+      - '#f2cbb7'
+      - '#ee8468'
+      - '#b40426'
+---
+
+<Block>
+<Prose>
+# NASA Earth Exchange Global Daily Downscaled Projections (NEX-GDDP-CMIP6)
+
+The NEX-GDDP-CMIP6 dataset provide a set of global, high resolution, bias-corrected climate change projections that can be used to evaluate climate change impacts on processes that are sensitive to finer-scale climate gradients and the effects of local topography on climate conditions.
+
+NEX-GDDP-CMIP6 is comprised of global downscaled climate scenarios derived from the General Circulation Model (GCM) runs conducted under the Coupled Model Intercomparison Project Phase 6 (CMIP6) and across all four “Tier 1” greenhouse gas emissions scenarios known as Shared Socioeconomic Pathways (SSPs). The CMIP6 GCM runs were developed in support of the Sixth Assessment Report of the Intergovernmental Panel on Climate Change (IPCC AR6). This dataset includes downscaled projections from ScenarioMIP model runs for which daily scenarios were produced and distributed through the Earth System Grid Federation. 
+
+### Summary
+
+
+## Dataset Preparation
+
+### This dataset represents a product computed from NEX-GDDP-CMIP6 model results
+
+
+
+</Prose>
+</Block>
