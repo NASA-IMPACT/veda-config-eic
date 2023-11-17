@@ -16,7 +16,7 @@ taxonomy:
 layers:
   - id: climdex-tmaxxf-access-cm2-ssp126-90
     stacCol: climdex-tmaxxf-access-cm2-ssp126
-    name: Days Above 90°F (SSP126)
+    name: SSP126: Days Above 90°F
     type: raster
     description: "Annual Number of Days Above 90°F (ACCESS-CM2 SSP126)"
     zoomExtent:
@@ -53,7 +53,7 @@ layers:
 
   - id: climdex-tmaxxf-access-cm2-ssp245-90
     stacCol: climdex-tmaxxf-access-cm2-ssp245
-    name: Days Above 90°F (SSP245)
+    name: SSP 245: Days Above 90°F
     type: raster
     description: "Annual Number of Days Above 90°F (ACCESS-CM2 SSP245)"
     zoomExtent:
@@ -90,7 +90,7 @@ layers:
 
   - id: climdex-tmaxxf-access-cm2-ssp370-90
     stacCol: climdex-tmaxxf-access-cm2-ssp370
-    name: Days Above 90°F (SSP370)
+    name: SSP370: Days Above 90°F
     type: raster
     description: "Annual Number of Days Above 90°F (ACCESS-CM2 SSP370)"
     zoomExtent:
@@ -127,7 +127,7 @@ layers:
 
   - id: climdex-tmaxxf-access-cm2-ssp585-90
     stacCol: climdex-tmaxxf-access-cm2-ssp585
-    name: Days Above 90°F (SSP585)
+    name: SSP585: Days Above 90°F
     type: raster
     description: "Annual Number of Days Above 90°F (ACCESS-CM2 SSP585)"
     zoomExtent:
@@ -142,6 +142,154 @@ layers:
     compare:
       datasetId: cmip6-climdex-tmaxxf-access-cm2
       layerId: climdex-tmaxxf-access-cm2-ssp585-90
+      mapLabel: |
+        ::js ({ dateFns, datetime, compareDatetime }) => {
+          if (dateFns && datetime && compareDatetime) return `${dateFns.format(datetime, 'yyyy')} VS ${dateFns.format(compareDatetime, 'yyyy')}`;
+        }      
+    analysis:
+      exclude: false
+    legend:
+      unit: 
+        label: Days
+      type: gradient
+      min: 0
+      max: 365
+      stops:
+      - '#3b4cc0'
+      - '#7b9ff9'
+      - '#c0d4f5'
+      - '#f2cbb7'
+      - '#ee8468'
+      - '#b40426'
+
+  - id: climdex-tmaxxf-access-cm2-ssp126-110
+    stacCol: climdex-tmaxxf-access-cm2-ssp126
+    name: SSP126: Days Above 110°F
+    type: raster
+    description: "Annual Number of Days Above 110°F (ACCESS-CM2 SSP126)"
+    zoomExtent:
+      - 0
+      - 4
+    sourceParams:
+      assets: tmax_above_110
+      resampling_method: bilinear
+      colormap_name: coolwarm
+      rescale: 0,365
+      maxzoom: 4
+    compare:
+      datasetId: cmip6-climdex-tmaxxf-access-cm2
+      layerId: climdex-tmaxxf-access-cm2-ssp126-110
+      mapLabel: |
+        ::js ({ dateFns, datetime, compareDatetime }) => {
+          if (dateFns && datetime && compareDatetime) return `${dateFns.format(datetime, 'yyyy')} VS ${dateFns.format(compareDatetime, 'yyyy')}`;
+        }      
+    analysis:
+      exclude: false
+    legend:
+      unit: 
+        label: Days
+      type: gradient
+      min: 0
+      max: 365
+      stops:
+      - '#3b4cc0'
+      - '#7b9ff9'
+      - '#c0d4f5'
+      - '#f2cbb7'
+      - '#ee8468'
+      - '#b40426'
+
+  - id: climdex-tmaxxf-access-cm2-ssp245-110
+    stacCol: climdex-tmaxxf-access-cm2-ssp245
+    name: SSP 245: Days Above 110°F
+    type: raster
+    description: "Annual Number of Days Above 110°F (ACCESS-CM2 SSP245)"
+    zoomExtent:
+      - 0
+      - 4
+    sourceParams:
+      assets: tmax_above_110
+      resampling_method: bilinear
+      colormap_name: coolwarm
+      rescale: 0,365
+      maxzoom: 4
+    compare:
+      datasetId: cmip6-climdex-tmaxxf-access-cm2
+      layerId: climdex-tmaxxf-access-cm2-ssp245-110
+      mapLabel: |
+        ::js ({ dateFns, datetime, compareDatetime }) => {
+          if (dateFns && datetime && compareDatetime) return `${dateFns.format(datetime, 'yyyy')} VS ${dateFns.format(compareDatetime, 'yyyy')}`;
+        }      
+    analysis:
+      exclude: false
+    legend:
+      unit: 
+        label: Days
+      type: gradient
+      min: 0
+      max: 365
+      stops:
+      - '#3b4cc0'
+      - '#7b9ff9'
+      - '#c0d4f5'
+      - '#f2cbb7'
+      - '#ee8468'
+      - '#b40426'
+
+  - id: climdex-tmaxxf-access-cm2-ssp370-110
+    stacCol: climdex-tmaxxf-access-cm2-ssp370
+    name: SSP370: Days Above 110°F
+    type: raster
+    description: "Annual Number of Days Above 110°F (ACCESS-CM2 SSP370)"
+    zoomExtent:
+      - 0
+      - 4
+    sourceParams:
+      assets: tmax_above_110
+      resampling_method: bilinear
+      colormap_name: coolwarm
+      rescale: 0,365
+      maxzoom: 4
+    compare:
+      datasetId: cmip6-climdex-tmaxxf-access-cm2
+      layerId: climdex-tmaxxf-access-cm2-ssp370-110
+      mapLabel: |
+        ::js ({ dateFns, datetime, compareDatetime }) => {
+          if (dateFns && datetime && compareDatetime) return `${dateFns.format(datetime, 'yyyy')} VS ${dateFns.format(compareDatetime, 'yyyy')}`;
+        }      
+    analysis:
+      exclude: false
+    legend:
+      unit: 
+        label: Days
+      type: gradient
+      min: 0
+      max: 365
+      stops:
+      - '#3b4cc0'
+      - '#7b9ff9'
+      - '#c0d4f5'
+      - '#f2cbb7'
+      - '#ee8468'
+      - '#b40426'
+
+  - id: climdex-tmaxxf-access-cm2-ssp585-110
+    stacCol: climdex-tmaxxf-access-cm2-ssp585
+    name: SSP585: Days Above 110°F
+    type: raster
+    description: "Annual Number of Days Above 110°F (ACCESS-CM2 SSP585)"
+    zoomExtent:
+      - 0
+      - 4
+    sourceParams:
+      assets: tmax_above_110
+      resampling_method: bilinear
+      colormap_name: coolwarm
+      rescale: 0,365
+      maxzoom: 4
+    compare:
+      datasetId: cmip6-climdex-tmaxxf-access-cm2
+      layerId: climdex-tmaxxf-access-cm2-ssp585-110
       mapLabel: |
         ::js ({ dateFns, datetime, compareDatetime }) => {
           if (dateFns && datetime && compareDatetime) return `${dateFns.format(datetime, 'yyyy')} VS ${dateFns.format(compareDatetime, 'yyyy')}`;
