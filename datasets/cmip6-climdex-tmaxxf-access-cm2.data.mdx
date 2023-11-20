@@ -16,7 +16,7 @@ taxonomy:
 layers:
   - id: climdex-tmaxxf-access-cm2-ssp126-90
     stacCol: climdex-tmaxxf-access-cm2-ssp126
-    name: Days Above 90°F (SSP126) [wistia]
+    name: Days Above 90°F (SSP126)
     type: raster
     description: "Annual Number of Days Above 90°F (ACCESS-CM2 SSP126)"
     zoomExtent:
@@ -44,16 +44,16 @@ layers:
       min: 0
       max: 365
       stops:
-      - '#3b4cc0'
-      - '#7b9ff9'
-      - '#c0d4f5'
-      - '#f2cbb7'
-      - '#ee8468'
-      - '#b40426'
+      - "#E4FF7A"
+      - "#FAED2D"
+      - "#FFCE0A"
+      - "#FFB100"
+      - "#FE9900"
+      - "#FC7F00"
 
   - id: climdex-tmaxxf-access-cm2-ssp245-90
     stacCol: climdex-tmaxxf-access-cm2-ssp245
-    name: Days Above 90°F (SSP245) [hot]
+    name: Days Above 90°F (SSP245)
     type: raster
     description: "Annual Number of Days Above 90°F (ACCESS-CM2 SSP245)"
     zoomExtent:
@@ -62,7 +62,7 @@ layers:
     sourceParams:
       assets: tmax_above_90
       resampling_method: bilinear
-      colormap_name: hot
+      colormap_name: wistia
       rescale: 0,365
       maxzoom: 4
     compare:
