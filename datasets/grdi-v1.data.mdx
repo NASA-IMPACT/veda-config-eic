@@ -1,13 +1,14 @@
 ---
 id: grdi-v1
-name: "The Global Gridded Relative Deprivation Index, Version 1"
+name: 'The Global Gridded Relative Deprivation Index, Version 1'
 description: This dataset characterizes the relative levels of multidimensional deprivation and poverty based on sociodemographic and satellite data
 media:
   src: ::file ./grdi--dataset-cover.jpg
-  alt: Figure by Jordan Opel
+  alt: Shacks along a river almost collapsing
   author:
     name: Jordan Opel
     url: https://unsplash.com/photos/photo-of-houses-near-body-of-water-3VLHF9b9Plg
+    alt: Figure by Jordan Opel
 taxonomy:
   - name: Theme
     values:
@@ -23,7 +24,7 @@ layers:
     stacCol: grdi-v1-raster
     name: GRDI
     type: raster
-    description: "Global Gridded Relative Deprivation Index (GRDI), where higher values indicate higher deprivation"
+    description: 'Global Gridded Relative Deprivation Index (GRDI), where higher values indicate higher deprivation'
     zoomExtent:
       - 0
       - 16
@@ -37,16 +38,16 @@ layers:
       min: 0
       max: 100
       stops:
-        - "#440154"
-        - "#3b528b"
-        - "#21918c"
-        - "#5ec962"
-        - "#fde725"
+        - '#440154'
+        - '#3b528b'
+        - '#21918c'
+        - '#5ec962'
+        - '#fde725'
   - id: grdi-filled-missing-values-count
     stacCol: grdi-filled-missing-values-count
     name: GRDI Constituent Inputs
     type: raster
-    description: "Global Gridded Relative Deprivation Index (GRDI) showing count of constituent inputs that were filled in per cell using the Fill Missing Values tool"
+    description: 'Global Gridded Relative Deprivation Index (GRDI) showing count of constituent inputs that were filled in per cell using the Fill Missing Values tool'
     zoomExtent:
       - 0
       - 16
@@ -60,16 +61,16 @@ layers:
       min: 0
       max: 100
       stops:
-        - "#440154"
-        - "#3b528b"
-        - "#21918c"
-        - "#5ec962"
-        - "#fde725"
+        - '#440154'
+        - '#3b528b'
+        - '#21918c'
+        - '#5ec962'
+        - '#fde725'
   - id: grdi-v1-built
     stacCol: grdi-v1-built
     name: GRDI Built-Up Area (BUILT)
     type: raster
-    description: "Ratio of built-up area (more urban areas) to non-built up area (more rural areas), where low values imply higher deprivation"
+    description: 'Ratio of built-up area (more urban areas) to non-built up area (more rural areas), where low values imply higher deprivation'
     zoomExtent:
       - 0
       - 16
@@ -83,16 +84,16 @@ layers:
       min: 0
       max: 100
       stops:
-        - "#440154"
-        - "#3b528b"
-        - "#21918c"
-        - "#5ec962"
-        - "#fde725"
+        - '#440154'
+        - '#3b528b'
+        - '#21918c'
+        - '#5ec962'
+        - '#fde725'
   - id: grdi-cdr-raster
     stacCol: grdi-cdr-raster
     name: GRDI Child Dependency Ratio (CDR)
     type: raster
-    description: "Ratio between the population of children (ages 0 to 14) to the working-age population (age 15 to 64). A higher ratio is generally associated with younger age structures, which implies higher relative deprivation"
+    description: 'Ratio between the population of children (ages 0 to 14) to the working-age population (age 15 to 64). A higher ratio is generally associated with younger age structures, which implies higher relative deprivation'
     zoomExtent:
       - 0
       - 16
@@ -106,16 +107,16 @@ layers:
       min: 0
       max: 100
       stops:
-        - "#440154"
-        - "#3b528b"
-        - "#21918c"
-        - "#5ec962"
-        - "#fde725"
+        - '#440154'
+        - '#3b528b'
+        - '#21918c'
+        - '#5ec962'
+        - '#fde725'
   - id: grdi-imr-raster
     stacCol: grdi-imr-raster
     name: GRDI Infant Mortality Rate (IMR)
     type: raster
-    description: "Number of deaths in children under 1 year of age per 1,000 live births in the same year"
+    description: 'Number of deaths in children under 1 year of age per 1,000 live births in the same year'
     zoomExtent:
       - 0
       - 16
@@ -129,16 +130,16 @@ layers:
       min: 0
       max: 100
       stops:
-        - "#440154"
-        - "#3b528b"
-        - "#21918c"
-        - "#5ec962"
-        - "#fde725"
+        - '#440154'
+        - '#3b528b'
+        - '#21918c'
+        - '#5ec962'
+        - '#fde725'
   - id: grdi-shdi-raster
     stacCol: grdi-shdi-raster
     name: GRDI Subnational Human Development Index (SHDI)
     type: raster
-    description: "Index of human well-being derived from a combination of “three dimensions: education, health, and standard of living (Smits & Permanyer, 2019)”. Lower SHDIs imply higher deprivation"
+    description: 'Index of human well-being derived from a combination of “three dimensions: education, health, and standard of living (Smits & Permanyer, 2019)”. Lower SHDIs imply higher deprivation'
     zoomExtent:
       - 0
       - 16
@@ -152,16 +153,16 @@ layers:
       min: 0
       max: 100
       stops:
-        - "#440154"
-        - "#3b528b"
-        - "#21918c"
-        - "#5ec962"
-        - "#fde725"
+        - '#440154'
+        - '#3b528b'
+        - '#21918c'
+        - '#5ec962'
+        - '#fde725'
   - id: grdi-vnl-raster
     stacCol: grdi-vnl-raster
     name: GRDI VIIRS Night Lights (VNL)
     type: raster
-    description: "Intensity of nighttime lights measured by the VIIRS satellite instrument for the year 2020 as a dimension where lower values imply higher deprivation"
+    description: 'Intensity of nighttime lights measured by the VIIRS satellite instrument for the year 2020 as a dimension where lower values imply higher deprivation'
     zoomExtent:
       - 0
       - 16
@@ -175,16 +176,16 @@ layers:
       min: 0
       max: 100
       stops:
-        - "#440154"
-        - "#3b528b"
-        - "#21918c"
-        - "#5ec962"
-        - "#fde725"
+        - '#440154'
+        - '#3b528b'
+        - '#21918c'
+        - '#5ec962'
+        - '#fde725'
   - id: grdi-vnl-slope-raster
     stacCol: grdi-vnl-slope-raster
     name: GRDI VIIRS Night Lights (VNL) Slope
     type: raster
-    description: "Difference in intensity of nighttime lights measured by the VIIRS satellite instrument between the years 2012 and 2020 (VNL Slope). Higher values (increasing brightness) imply decreasing deprivation and lower values imply increasing deprivation"
+    description: 'Difference in intensity of nighttime lights measured by the VIIRS satellite instrument between the years 2012 and 2020 (VNL Slope). Higher values (increasing brightness) imply decreasing deprivation and lower values imply increasing deprivation'
     zoomExtent:
       - 0
       - 16
@@ -198,14 +199,14 @@ layers:
       min: 0
       max: 100
       stops:
-        - "#440154"
-        - "#3b528b"
-        - "#21918c"
-        - "#5ec962"
-        - "#fde725"
+        - '#440154'
+        - '#3b528b'
+        - '#21918c'
+        - '#5ec962'
+        - '#fde725'
 ---
 
-<Block type='wide'>
+<Block>
   <Prose>
     ## About
 
