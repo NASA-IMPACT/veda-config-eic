@@ -23,8 +23,8 @@ export function ExpandLink(props) {
 
   return (
     <ExpandLinkCmp {...rest}>
-      {children}
       <CollecticonExpandTopRight />
+      {children}
     </ExpandLinkCmp>
   );
 }
