@@ -161,7 +161,7 @@ export default function HomeComponent() {
             <FoldHeadActions>
               <Button
                 forwardedAs={Link}
-                to="/stories" //@TODO: THIS NEEDS TO BE REPLACED
+                to="/stories"
                 size="medium"
                 radius="square"
                 variation="primary-fill"
