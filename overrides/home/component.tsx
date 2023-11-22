@@ -181,7 +181,7 @@ export default function HomeComponent() {
               <p>
                 Earth.gov is also the gateway to other interagency cooperative
                 efforts for our planet, like the{" "}
-                <ExpandLink to={`https://earth.gov/ghgcenter`}>
+                <ExpandLink as="a" href="https://earth.gov/ghgcenter">
                   {" "}
                   U.S. Greenhouse Gas Center
                 </ExpandLink>
