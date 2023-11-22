@@ -181,7 +181,7 @@ export default function HomeComponent() {
               <p>
                 Earth.gov is also the gateway to other interagency cooperative
                 efforts for our planet, like the{" "}
-                <ExpandLink to={`https://ghg.center/`}>
+                <ExpandLink to={`https://earth.gov/ghgcenter`}>
                   {" "}
                   U.S. Greenhouse Gas Center
                 </ExpandLink>
@@ -199,7 +199,7 @@ export default function HomeComponent() {
                   </span>
                   <Button
                     forwardedAs="a"
-                    href="https://hub.ghg.center/hub/" //@TODO: This isn't working with external link
+                    href="https://earth.gov/ghgcenter"
                     size="medium"
                     radius="square"
                     variation="primary-fill"
@@ -226,7 +226,7 @@ export default function HomeComponent() {
             <Partners size="small" />
             <Button
               forwardedAs="a"
-              href="https://ghg.center/" //@TODO: THIS NEEDS TO BE REPLACED
+              href="/about"
               size="medium"
               radius="square"
               variation="primary-fill"
