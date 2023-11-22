@@ -4,7 +4,7 @@ import styled from "$veda-ui/styled-components";
 import { glsp, themeVal } from "$veda-ui/@devseed-ui/theme-provider";
 import { CollecticonExpandTopRight } from "$veda-ui/@devseed-ui/collecticons";
 
-const ExpandLinkCmp = styled(NavLink)`
+const ExpandLinkCmp = styled(NavLink).a`
   display: flex;
   align-items: center;
   gap: ${glsp(0.5)};
