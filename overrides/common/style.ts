@@ -68,8 +68,9 @@ export const accessibilityMenuItems = styled(NavLink)`\
     outline: 3px solid ${themeVal("color.primary")};
   }
 
-  :active {
-    outline: 3px solid black;
+  &:active {
+    outline: 3px solid ${themeVal("color.primary")};
+    text-decoration: underline;
   }
 `;
 
