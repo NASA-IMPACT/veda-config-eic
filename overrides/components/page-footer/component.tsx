@@ -26,6 +26,7 @@ import { useFeedbackModal } from "$veda-ui-scripts/components/common/layout-root
 import { useMediaQuery } from "$veda-ui-scripts/utils/use-media-query";
 import Partners from "../../home/partners";
 import BrandLogo from "../header-brand/logo.svg";
+import { accessibilityMenuItems } from "../../common/style";
 
 const FooterInner = styled.div`
   display: flex;
@@ -53,15 +54,11 @@ const FooterMenu = styled.ul`
   `}
 `;
 
-const FooterMenuLink = styled(NavLink)`
+const FooterMenuLink = styled(accessibilityMenuItems)`
   font-weight: ${themeVal("type.base.medium")};
   text-decoration: none;
   font-size: 0.875rem;
   text-transform: ${themeVal("button.type.case")};
-
-  &:hover {
-    text-decoration: underline;
-  }
 `;
 
 const FooterContacts = styled.div`
@@ -195,6 +192,64 @@ export default function PageFooter(props) {
 
   const showModal = modalRevealed && modalsDismissed[currentPage] === false;
 
+  const menuItems = [
+    {
+      path: DATASETS_PATH,
+      text: 'Data Catalog',
+    },
+    {
+      path: ANALYSIS_PATH,
+      text: 'Data Analysis',
+    },
+    {
+      path: STORIES_PATH,
+      text: getString("stories").other,
+    },
+    ...(!!process.env.HUB_URL && !!process.env.HUB_NAME ? [{
+      path: process.env.HUB_URL,
+      text: process.env.HUB_NAME,
+    }]: []),
+    {
+      path: "/visit",
+      text: "Visit the center",
+    },
+    {
+      path: "/teach",
+      text: "Teach",
+    },
+    {
+      path: ABOUT_PATH,
+      text: "About",
+    },
+    {
+      path: "https://docs.google.com/forms/d/1mDgFqUsNv90Js7pERNDbmyN5RksztIy5ZZojWD0n5Pg",
+      text: "Contact Us",
+    },
+  ]
+
+  const createMenu = () => (
+    <FooterMenu>
+      {menuItems.map((item, i) => {
+        if ((item.path == process.env.HUB_URL && item.text == process.env.HUB_NAME) || item.text == "Contact Us") {
+          return (
+            <li key={i}>
+              <FooterMenuLink as="a" href={item.path}>
+                {item.text}
+              </FooterMenuLink>
+            </li>
+          )
+        }
+        else {
+          return (
+            <li key={i}>
+              <FooterMenuLink to={item.path}>{item.text}</FooterMenuLink>
+            </li>
+          )
+        }
+      })}
+    </FooterMenu>
+  )
+
   return (
     <>
       {MODALS_CONTENT[currentPage] && (
@@ -241,45 +296,7 @@ export default function PageFooter(props) {
       <FooterInner>
         <FooterContent>
           <nav>
-            <FooterMenu>
-              <li>
-                <FooterMenuLink to={DATASETS_PATH}>Data Catalog</FooterMenuLink>
-              </li>
-              <li>
-                <FooterMenuLink to={ANALYSIS_PATH}>
-                  Data Analysis
-                </FooterMenuLink>
-              </li>
-              <li>
-                <FooterMenuLink to={STORIES_PATH}>
-                  {getString("stories").other}
-                </FooterMenuLink>
-              </li>
-              {!!process.env.HUB_URL && !!process.env.HUB_NAME && (
-                <li>
-                  <FooterMenuLink as="a" href={process.env.HUB_URL}>
-                    {process.env.HUB_NAME}
-                  </FooterMenuLink>
-                </li>
-              )}
-              <li>
-                <FooterMenuLink to="/visit">Visit the center</FooterMenuLink>
-              </li>
-              <li>
-                <FooterMenuLink to="/teach">Teach</FooterMenuLink>
-              </li>
-              <li>
-                <FooterMenuLink to={ABOUT_PATH}>About</FooterMenuLink>
-              </li>
-              <li>
-                <FooterMenuLink
-                  as="a"
-                  href="https://docs.google.com/forms/d/1mDgFqUsNv90Js7pERNDbmyN5RksztIy5ZZojWD0n5Pg/viewform"
-                >
-                  Contact Us
-                </FooterMenuLink>
-              </li>
-            </FooterMenu>
+            {createMenu()}
           </nav>
         </FooterContent>
         <FooterContacts>

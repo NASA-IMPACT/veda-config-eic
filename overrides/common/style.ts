@@ -1,6 +1,7 @@
 import { themeVal, glsp } from "$veda-ui/@devseed-ui/theme-provider";
 import styled, { css } from "$veda-ui/styled-components";
 import { VarHeading } from "$veda-ui-scripts/styles/variable-components";
+import { NavLink } from "$veda-ui/react-router-dom";
 
 export const hoverStyle = css`
   &:hover {
@@ -40,3 +41,35 @@ export const decorativeHeader = css`
     background: ${themeVal("color.primary")};
   }
 `;
+
+export const accessibilityLinks = styled.a`
+  text-decoration: underline;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:focus {
+    outline: 3px solid ${themeVal("color.primary")};
+  }
+
+  &:active {
+    outline: 3px solid black;
+  }
+`;
+
+export const accessibilityMenuItems = styled(NavLink)`\
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  &:focus {
+    outline: 3px solid ${themeVal("color.primary")};
+  }
+
+  :active {
+    outline: 3px solid black;
+  }
+`;
+
