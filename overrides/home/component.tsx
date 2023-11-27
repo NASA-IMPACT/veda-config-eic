@@ -141,9 +141,9 @@ export default function HomeComponent() {
         <IntroHeadline>
           <IntroDesc>
             <StyledVarHeading size="xlarge" as="h1">
-              Multiple agencies,
-              <br /> many interconnected systems, <br />
-              <span>one planet.</span>
+              One government
+              <br />
+              working for <span>one planet.</span>
             </StyledVarHeading>
             <p>{description}</p>
           </IntroDesc>
