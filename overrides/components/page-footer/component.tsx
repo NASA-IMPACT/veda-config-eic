@@ -26,7 +26,7 @@ import { useFeedbackModal } from "$veda-ui-scripts/components/common/layout-root
 import { useMediaQuery } from "$veda-ui-scripts/utils/use-media-query";
 import Partners from "../../home/partners";
 import BrandLogo from "../header-brand/logo.svg";
-import { accessibilityMenuItems } from "../../common/style";
+import { AccessibilityMenuItems } from "../../common/style";
 
 const FooterInner = styled.div`
   display: flex;
@@ -54,7 +54,7 @@ const FooterMenu = styled.ul`
   `}
 `;
 
-const FooterMenuLink = styled(accessibilityMenuItems)`
+const FooterMenuLink = styled(AccessibilityMenuItems)`
   font-weight: ${themeVal("type.base.medium")};
   text-decoration: none;
   font-size: 0.875rem;
@@ -230,22 +230,15 @@ export default function PageFooter(props) {
   const createMenu = () => (
     <FooterMenu>
       {menuItems.map((item, i) => {
-        if ((item.path == process.env.HUB_URL && item.text == process.env.HUB_NAME) || item.text == "Contact Us") {
-          return (
-            <li key={i}>
-              <FooterMenuLink as="a" href={item.path}>
-                {item.text}
-              </FooterMenuLink>
-            </li>
-          )
-        }
-        else {
-          return (
-            <li key={i}>
-              <FooterMenuLink to={item.path}>{item.text}</FooterMenuLink>
-            </li>
-          )
-        }
+        const isExternalLink = item.path.match(/^https?:\/\//);
+        const linkProps = isExternalLink
+          ? { as: "a", href: item.path }
+          : { to: item.path };
+        return (
+          <li key={i}>
+            <FooterMenuLink {...linkProps}>{item.text}</FooterMenuLink>
+          </li>
+        );
       })}
     </FooterMenu>
   )

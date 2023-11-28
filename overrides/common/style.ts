@@ -42,7 +42,7 @@ export const decorativeHeader = css`
   }
 `;
 
-export const accessibilityLinks = styled.a`
+export const AccessibilityLinks = styled.a`
   text-decoration: underline;
 
   &:hover {
@@ -58,7 +58,7 @@ export const accessibilityLinks = styled.a`
   }
 `;
 
-export const accessibilityMenuItems = styled(NavLink)`\
+export const AccessibilityMenuItems = styled(NavLink)`
   &:hover {
     cursor: pointer;
     text-decoration: underline;
