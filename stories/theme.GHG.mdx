@@ -27,6 +27,94 @@ taxonomy:
 import CardGallery from "./components/card_gallery";
 import { greenhouseGasesStoryIds } from "../overrides/common/story-data";
 
+import styled from "$veda-ui/styled-components";
+import { Button } from "$veda-ui/@devseed-ui/button";
+import { ExpandLink } from "../overrides/home/expand-link";
+import Hug from "$veda-ui-scripts/styles/hug";
+import {
+  Fold,
+  FoldBody
+} from "$veda-ui-scripts/components/common/fold";
+import { StyledVarHeading } from "../overrides/common/style";
+
+const BottomContent = styled(Hug)``;
+
+const InfoImageContent = styled.div`
+  display: flex;
+  flex-flow: row;
+  background-color: #02225b;
+  color: #ffffff;
+  width: 100%;
+  height: 300px;
+  background-image: url(${RedEarthImg});
+  background-position: right bottom -50px;
+  background-repeat: no-repeat;
+  div {
+    display: flex;
+    flex-flow: column;
+    gap: ${glsp()};
+    padding-left: ${glsp(3)};
+    justify-content: center;
+  }
+
+  a {
+    width: 18.5rem;
+  }
+  grid-column: full-start / full-end;
+  ${media.largeUp`
+    grid-column: content-2 / content-12;
+    height: 350px;
+  `}
+`;
+
+const HugP = styled(Hug)`
+  > p {
+    grid-column: full-start / full-end;
+    ${media.largeUp`
+      grid-column: content-2 / content-12;
+    `}
+  }
+`;
+
+<GradientWrapper>
+  <Fold>
+    <FoldBody>
+      <HugP>
+        <p>
+          Earth.gov is also the gateway to other interagency cooperative
+          efforts for our planet, like the{" "}
+          <ExpandLink as="a" href="https://earth.gov/ghgcenter">
+            {" "}
+            U.S. Greenhouse Gas Center
+          </ExpandLink>
+        </p>
+      </HugP>
+      <BottomContent>
+        <InfoImageContent>
+          <div>
+            <StyledVarHeading size="small" as="h2">
+              U.S. Greenhouse Gas Center
+            </StyledVarHeading>
+            <span>
+              Uniting Data and Technology to Empower Tomorrow's Climate
+              Solutions
+            </span>
+            <Button
+              forwardedAs="a"
+              href="https://earth.gov/ghgcenter"
+              size="medium"
+              radius="square"
+              variation="primary-fill"
+            >
+              Visit the U.S. GHG Center website
+            </Button>
+          </div>
+        </InfoImageContent>
+      </BottomContent>
+    </FoldBody>
+  </Fold>
+</GradientWrapper>
+
 <Block type='wide'>
   <Prose>
     ## Info
