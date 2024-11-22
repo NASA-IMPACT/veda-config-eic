@@ -4,7 +4,9 @@ export default [
       title: 'U.S. Greenhouse Gas Center',
       description: "The U.S. Greenhouse Gas Center (US GHG Center) is a multi-agency effort consolidating greenhouse gas information from observations and models.",
       image: new URL('../media/ghgc-v2.jpg', import.meta.url).href,
-      imageAlt: 'Earth with Greenhouse Gas Emissions shaded in red'
+      imageAlt: 'Earth with Greenhouse Gas Emissions shaded in red',
+      imageOverlayText1: 'U.S. Greenhouse Gas Center',
+      imageOverlayText2: 'Example second line text'
     },
     {
       link: 'https://earth.gov/sealevel',

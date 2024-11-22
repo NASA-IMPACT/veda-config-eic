@@ -60,6 +60,29 @@ export function DesktopCarousel () {
             classNames="imagetransition"
           >
             <div className="carousel--height width-full position-absolute left-0 top-0 shadow-1">
+              { (itemInProgress.imageOverlayText1 || itemInProgress.imageOverlayText2) && (
+                  <div
+                    className="position-absolute text-lower-left"
+                    style={{
+                      bottom: '10px',
+                      left: '10px',
+                      color: '#fff',
+                      background: 'rgba(0, 0, 0, 0.5)',
+                      padding: '10px',
+                      borderRadius: '4px',
+                      fontSize: '1.2rem',
+                      fontWeight: 'bold',
+                      lineHeight: '1.5'
+                    }}
+                  >
+                    {itemInProgress.imageOverlayText1 && (
+                      <span style={{ display: 'block' }}>{itemInProgress.imageOverlayText1}</span>
+                    )}
+                    {itemInProgress.imageOverlayText2 && (
+                      <span style={{ display: 'block' }}>{itemInProgress.imageOverlayText2}</span>
+                    )}
+                  </div>
+                )}
               <img className="carousel--content-image" src={itemInProgress.image} alt={itemInProgress.imageAlt} />
             </div>
           </CSSTransition>
