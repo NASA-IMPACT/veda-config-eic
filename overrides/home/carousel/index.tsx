@@ -69,10 +69,8 @@ export function DesktopCarousel () {
                       color: '#fff',
                       background: 'rgba(0, 0, 0, 0.5)',
                       padding: '10px',
-                      borderRadius: '4px',
                       fontSize: '1.2rem',
                       fontWeight: 'bold',
-                      lineHeight: '1.5'
                     }}
                   >
                     {itemInProgress.imageOverlayText1 && (
@@ -111,7 +109,27 @@ function TabletCarousel() {
     <Grid row className="margin-top-2">
         {CarouselItems.map((item) => {
           return <Grid col={12} key={item.title} className="margin-bottom-4">
-              <div>
+              <div className='position-relative'>
+              { (item.imageOverlayText1 || item.imageOverlayText2) && (
+                <div
+                  className="position-absolute text-lower-left"
+                  style={{
+                    bottom: '10px',
+                    left: '10px',
+                    color: '#fff',
+                    padding: '10px',
+                    fontSize: '3vw',
+                    fontWeight: 'bold',
+                  }}
+                >
+                  {item.imageOverlayText1 && (
+                    <span style={{ display: 'block' }}>{item.imageOverlayText1}</span>
+                  )}
+                  {item.imageOverlayText2 && (
+                    <span style={{ display: 'block' }}>{item.imageOverlayText2}</span>
+                  )}
+                </div>
+              )}
               <img className="carousel--content-image" src={item.image} />
               </div>
               <h3 className="margin-top-1">{item.title}</h3>
