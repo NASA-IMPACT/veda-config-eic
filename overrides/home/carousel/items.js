@@ -13,7 +13,9 @@ export default [
       title: 'Global Sea Level Change Portal',
       description: 'The Global Sea Level Change Portal is an international collaboration that offers essential information on current and projected sea level rise to inform coastal communities across the globe.',
       image: new URL('../media/global_slr_v2.jpg', import.meta.url).href,
-      imageAlt: 'Satellite image of coastline'
+      imageAlt: 'Satellite image of coastline',
+      imageOverlayText1: 'Global Sea Level Change Portal',
+      imageOverlayText2: 'Example second line text'
     },
     {
     link: 'https://earth.gov/sealevel/us/',

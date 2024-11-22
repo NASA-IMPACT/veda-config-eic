@@ -61,26 +61,17 @@ export function DesktopCarousel () {
           >
             <div className="carousel--height width-full position-absolute left-0 top-0 shadow-1">
               { (itemInProgress.imageOverlayText1 || itemInProgress.imageOverlayText2) && (
-                  <div
-                    className="position-absolute text-lower-left"
-                    style={{
-                      bottom: '10px',
-                      left: '10px',
-                      color: '#fff',
-                      background: 'rgba(0, 0, 0, 0.5)',
-                      padding: '10px',
-                      fontSize: '1.2rem',
-                      fontWeight: 'bold',
-                    }}
-                  >
-                    {itemInProgress.imageOverlayText1 && (
-                      <span style={{ display: 'block' }}>{itemInProgress.imageOverlayText1}</span>
-                    )}
-                    {itemInProgress.imageOverlayText2 && (
-                      <span style={{ display: 'block' }}>{itemInProgress.imageOverlayText2}</span>
-                    )}
-                  </div>
-                )}
+                <div
+                  className="position-absolute text-lower-left"
+                  style={{
+                    bottom: '10px',
+                    left: '10px',
+                  }}
+                >
+                  {itemInProgress.imageOverlayText1 && <TitleOverImage1 text={itemInProgress.imageOverlayText1} fontSize="1.2rem" />}
+                  {itemInProgress.imageOverlayText2 && <TitleOverImage2 text={itemInProgress.imageOverlayText2} fontSize="1.2rem" />}
+                </div>
+              )}
               <img className="carousel--content-image" src={itemInProgress.image} alt={itemInProgress.imageAlt} />
             </div>
           </CSSTransition>
@@ -116,18 +107,10 @@ function TabletCarousel() {
                   style={{
                     bottom: '10px',
                     left: '10px',
-                    color: '#fff',
-                    padding: '10px',
-                    fontSize: '3vw',
-                    fontWeight: 'bold',
                   }}
                 >
-                  {item.imageOverlayText1 && (
-                    <span style={{ display: 'block' }}>{item.imageOverlayText1}</span>
-                  )}
-                  {item.imageOverlayText2 && (
-                    <span style={{ display: 'block' }}>{item.imageOverlayText2}</span>
-                  )}
+                  {item.imageOverlayText1 && <TitleOverImage1 text={item.imageOverlayText1} fontSize="3vw" />}
+                  {item.imageOverlayText2 && <TitleOverImage2 text={item.imageOverlayText2} fontSize="3vw" />}
                 </div>
               )}
               <img className="carousel--content-image" src={item.image} />
@@ -140,6 +123,40 @@ function TabletCarousel() {
   </GridContainer>
 }
 
+export function TitleOverImage1({ text, fontSize }) {
+  return (
+    <span
+      style={{
+        display: 'block',
+        color: '#fff',
+        background: 'rgba(0, 0, 0, 0.5)',
+        padding: '10px',
+        borderRadius: '4px',
+        fontSize: fontSize || '1.2rem',
+        fontWeight: 'bold',
+      }}
+    >
+      {text}
+    </span>
+  );
+}
+
+export function TitleOverImage2({ text, fontSize }) {
+  return (
+    <span
+      style={{
+        display: 'block',
+        color: '#fff',
+        background: 'rgba(0, 0, 0, 0.5)',
+        padding: '10px',
+        fontSize: fontSize || '1.2rem',
+        fontWeight: 'bold',
+      }}
+    >
+      {text}
+    </span>
+  );
+}
 
 export default function Carousel() {
   const { isMediumUp } = useMediaQuery();
