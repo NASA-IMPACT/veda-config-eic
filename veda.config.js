@@ -34,6 +34,13 @@ module.exports = {
     "/teach": "./custom-pages/teach/index.mdx",
   },
 
+  banner: {
+    text: 'TO BE REPLACED WITH GOV SHUTDOWN CONTENT',
+    url: '/',
+    expires: '2025-06-01T12:00:00-04:00',
+    type: 'info'
+  },
+
   strings: {
     stories: {
       one: "Theme",
