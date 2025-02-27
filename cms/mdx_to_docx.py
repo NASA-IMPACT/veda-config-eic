@@ -92,14 +92,20 @@ def render_content_to_doc(doc: DocumentType, content: str):
     for i in range(len(tags)):
         tags[i] = split_tag_into_subtags(tags[i])
     
-    print(tags[2][1])
-    import pdb; pdb.set_trace()
+    doc.add_paragraph(str(tags))
 
 
 def split_tag_into_subtags(tag):
+    print(tag[1:-1])
     if len(tag) >=2 and tag[1].startswith('<'):
+        open_tag = tag[0][1:].split()[0]
+        close_tag = tag[-1][2:-1]
+        if open_tag != close_tag:
+            print(tag)
+            raise ValueError(f"{open_tag} doesn't equal {close_tag}")
         sub_tags = split_content_into_tags('\n'.join(tag[1:-1]))
-        return [split_tag_into_subtags(this_tag) for this_tag in sub_tags]
+        return [tag[0], *[split_tag_into_subtags(this_tag) for this_tag in sub_tags], tag[-1]]
+    print(tag)
     return tag
 
 def split_content_into_tags(content):
@@ -112,8 +118,9 @@ def split_content_into_tags(content):
     result = []
     current_group = []
     current_tag = None
+    opened = 0
     for part in parts:
-        if part.endswith('/>'): 
+        if part.startswith('<') and part.endswith('/>'): 
             if len(current_group) == 0:
                 result.append([part])
             else:
@@ -122,16 +129,19 @@ def split_content_into_tags(content):
 
         current_group.append(part)
 
-        if current_tag is None:
-            if part.startswith('<') and not part.startswith('</'):
+        if part.startswith('<') and not part.startswith('</'):
+            opened += 1
+            if current_tag is None:
                 current_tag = part
 
         if current_tag is not None:
             # Closing tag
             if part.startswith('</'):
+                opened -= 1
                 # Matching closing tag found
-                #print(part, current_tag)
-                if part[2:-1] == current_tag[1:].split()[0].replace('>',''):
+                close_tag = part[2:-1]
+                open_tag = current_tag[1:].split()[0].replace('>','')
+                if close_tag == open_tag and opened == 0:
                     result.append(current_group)
                     current_group = []
                     current_tag = None
