@@ -66,8 +66,13 @@ def mdx_to_docx(mdx_directory, output_file):
                 # Remove front matter from the content
                 if front_matter:
                     content = content.replace(front_matter.group(0), '', 1).strip()
+                
+                # Remove lines that start with 'import'
+                content = '\n'.join([line for line in content.split('\n') if not line.strip().startswith('import')])
+                content = content.strip()
+
                 # Add the rest of the content
-                doc.add_paragraph(content)
+                render_content_to_doc(doc, content)
                 
                 # Add a page break between files
                 doc.add_page_break()
