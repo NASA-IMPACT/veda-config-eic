@@ -137,17 +137,13 @@ def handle_prose(doc: DocumentType, tag):
                 current_paragraph.add_run('\n')  # Add a line break between runs
             current_paragraph.add_run(line.strip())
     
-    # Add the last paragraph if it exists
-    if current_paragraph:
-        doc.add_paragraph(current_paragraph)
-    
     return ''
 
 def handle_figure(doc: DocumentType, tag):
     content = tag[1:-1]
     for item in content:
         if len(item) == 1:
-           add_big(doc, item[0]) 
+            add_big(doc, item[0], big=not item[0].startswith('<Image')) 
         else:
             if item[0].startswith('<Caption'):
                 paragraph = doc.add_paragraph()
@@ -160,11 +156,11 @@ def handle_figure(doc: DocumentType, tag):
     return ''
 
 
-def add_big(doc:DocumentType, content):
+def add_big(doc:DocumentType, content, big=True):
     paragraph = doc.add_paragraph()
     run = paragraph.add_run(content)
     run.bold = True
-    run.font.size = Pt(14)  # Increase font size (14 is just an example, adjust as needed)
+    if big: run.font.size = Pt(14)  # Increase font size (14 is just an example, adjust as needed)
     return paragraph
 
 def split_tag_into_subtags(tag):
