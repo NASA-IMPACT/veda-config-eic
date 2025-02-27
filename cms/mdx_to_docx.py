@@ -1,5 +1,7 @@
 import os
 import re
+## https://python-docx.readthedocs.io/en/latest/user/install.html
+## pip install python-docx
 from docx import Document
 from docx.oxml.shared import qn, OxmlElement
 from docx.opc.constants import RELATIONSHIP_TYPE
