@@ -102,7 +102,7 @@ def render_tag(doc:DocumentType, tag):
 
     if tag_type in tag_handlers.keys(): return tag_handlers[tag_type](doc, tag)
     elif len(tag) == 1: 
-        doc.add_paragraph(tag[0])
+        add_big(doc,tag[0])
     return_value = ''
 
     ## nested sub tags
@@ -113,25 +113,41 @@ def render_tag(doc:DocumentType, tag):
         else: return_value += sub_tag
     return return_value
 
-def handle_prose(doc:DocumentType, tag):
+def handle_prose(doc: DocumentType, tag):
     content = ''.join(tag[1:-1])
-    for line in content.split('\n'):
+    lines = content.split('\n')
+    current_paragraph = None
+    
+    for line in lines:
         if line.startswith('#'):
-            level = 'line'.count('#')
-            ## +1 makes sure they're always a sub-heading
-            doc.add_heading(line.split('#')[-1], level + 1)
+            # Add the current paragraph if it exists
+            if current_paragraph:
+                doc.add_paragraph(current_paragraph)
+                current_paragraph = None
+            
+            # Add the heading
+            level = line.count('#')
+            doc.add_heading(line.lstrip('#').strip(), level + 1)
         else:
-            doc.add_paragraph(line)
+            if not current_paragraph:
+                current_paragraph = doc.add_paragraph()
+            
+            # Add a new run for each line
+            if current_paragraph.runs:
+                current_paragraph.add_run('\n')  # Add a line break between runs
+            current_paragraph.add_run(line.strip())
+    
+    # Add the last paragraph if it exists
+    if current_paragraph:
+        doc.add_paragraph(current_paragraph)
+    
     return ''
 
 def handle_figure(doc: DocumentType, tag):
     content = tag[1:-1]
     for item in content:
         if len(item) == 1:
-            paragraph = doc.add_paragraph()
-            run = paragraph.add_run(item[0])
-            run.bold = True
-            run.font.size = Pt(14)  # Increase font size (14 is just an example, adjust as needed)
+           add_big(doc, item[0]) 
         else:
             if item[0].startswith('<Caption'):
                 paragraph = doc.add_paragraph()
@@ -143,6 +159,13 @@ def handle_figure(doc: DocumentType, tag):
                 raise NotImplementedError(item)
     return ''
 
+
+def add_big(doc:DocumentType, content):
+    paragraph = doc.add_paragraph()
+    run = paragraph.add_run(content)
+    run.bold = True
+    run.font.size = Pt(14)  # Increase font size (14 is just an example, adjust as needed)
+    return paragraph
 
 def split_tag_into_subtags(tag):
     if len(tag) >=2 and tag[1].startswith('<'):
