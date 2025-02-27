@@ -96,16 +96,13 @@ def render_content_to_doc(doc: DocumentType, content: str):
 
 
 def split_tag_into_subtags(tag):
-    print(tag[1:-1])
     if len(tag) >=2 and tag[1].startswith('<'):
-        open_tag = tag[0][1:].split()[0]
+        open_tag = tag[0][1:-1].split()[0]
         close_tag = tag[-1][2:-1]
         if open_tag != close_tag:
-            print(tag)
             raise ValueError(f"{open_tag} doesn't equal {close_tag}")
         sub_tags = split_content_into_tags('\n'.join(tag[1:-1]))
         return [tag[0], *[split_tag_into_subtags(this_tag) for this_tag in sub_tags], tag[-1]]
-    print(tag)
     return tag
 
 def split_content_into_tags(content):
