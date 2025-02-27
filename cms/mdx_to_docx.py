@@ -83,16 +83,47 @@ def mdx_to_docx(mdx_directory, output_file):
     doc.save(output_file)
 
 def render_content_to_doc(doc: DocumentType, content: str):
-    tag_handlers: Dict[str, Callable] = {
-        'Carousel': handle_carousel,
-        # Add more tag handlers here as needed
-    }
-
+    ## get nested tags
     tags = split_content_into_tags(content)
     for i in range(len(tags)):
         tags[i] = split_tag_into_subtags(tags[i])
     
-    doc.add_paragraph(str(tags))
+    for tag in tags:
+        render_tag(doc,tag)
+
+def render_tag(doc:DocumentType, tag):
+    tag_handlers: Dict[str, Callable] = {
+        'Prose': handle_prose,
+        'Figure': handle_figure,
+        # Add more tag handlers here as needed
+    }
+    tag_type = tag[0][1:-1].split()[0]
+
+    if tag_type in tag_handlers.keys(): return tag_handlers[tag_type](doc, tag)
+    elif len(tag) == 1: 
+        doc.add_paragraph(tag[0])
+    return_value = ''
+
+    ## nested sub tags
+    for sub_tag in tag[1:-1]:
+        if type(sub_tag) == list: 
+            sub_value = render_tag(doc,sub_tag)
+            return_value += sub_value
+        else: return_value += sub_tag
+    return return_value
+
+def handle_prose(doc:DocumentType, tag):
+    content = ''.join(tag[1:-1])
+    for line in content.split('\n'):
+        if line.startswith('#'):
+            level = 'line'.count('#')
+            ## +1 makes sure they're always a sub-heading
+            doc.add_heading(line.split('#')[-1], level + 1)
+    return ''
+
+def handle_figure(doc, tag):
+    pass
+    return ''
 
 
 def split_tag_into_subtags(tag):
