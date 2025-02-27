@@ -119,10 +119,21 @@ def handle_prose(doc:DocumentType, tag):
             level = 'line'.count('#')
             ## +1 makes sure they're always a sub-heading
             doc.add_heading(line.split('#')[-1], level + 1)
+        else:
+            doc.add_paragraph(line)
     return ''
 
-def handle_figure(doc, tag):
-    pass
+def handle_figure(doc:DocumentType, tag):
+    content = tag[1:-1]
+    for item in content:
+        if len(item) == 1:
+            doc.add_paragraph(item[0])
+        else:
+            if item[0].startswith('<Caption'):
+                doc.add_paragraph(f'Figure Caption: {item[1]}')
+            else:
+                print("Can only handle captions...")
+                raise NotImplementedError(item)
     return ''
 
 
