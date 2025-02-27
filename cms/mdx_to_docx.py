@@ -82,7 +82,7 @@ def mdx_to_docx(mdx_directory, output_file, doc = None):
                 # Add a page break between files
                 doc.add_page_break()
     
-    doc.save(output_file)
+    if output_file is not None: doc.save(output_file)
     return doc
 
 def render_content_to_doc(doc: DocumentType, content: str):
@@ -276,6 +276,6 @@ def add_hyperlink(paragraph, url, text):
 
 if __name__ == '__main__':
     # Usage
-    doc = mdx_to_docx('../overrides/home', 'output.docx')
-    doc = mdx_to_docx('../overrides', 'output.docx',doc)
+    doc = mdx_to_docx('../overrides/home', None)
+    doc = mdx_to_docx('../overrides', None, doc)
     doc = mdx_to_docx('../stories', 'earthDOTgov-content.docx',doc)
