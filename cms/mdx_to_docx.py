@@ -89,8 +89,18 @@ def render_content_to_doc(doc: DocumentType, content: str):
     }
 
     tags = split_content_into_tags(content)
-    print(tags)
+    for i in range(len(tags)):
+        tags[i] = split_tag_into_subtags(tags[i])
+    
+    print(tags[2][1])
     import pdb; pdb.set_trace()
+
+
+def split_tag_into_subtags(tag):
+    if len(tag) >=2 and tag[1].startswith('<'):
+        sub_tags = split_content_into_tags('\n'.join(tag[1:-1]))
+        return [split_tag_into_subtags(this_tag) for this_tag in sub_tags]
+    return tag
 
 def split_content_into_tags(content):
     # Split content into parts, separating tags and text
