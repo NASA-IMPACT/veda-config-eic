@@ -5,6 +5,7 @@ from typing import Dict, Callable
 ## https://python-docx.readthedocs.io/en/latest/user/install.html
 ## pip install python-docx
 from docx import Document
+from docx.shared import Pt
 from docx.document import Document as DocumentType
 from docx.oxml.shared import qn, OxmlElement
 from docx.opc.constants import RELATIONSHIP_TYPE
@@ -123,14 +124,20 @@ def handle_prose(doc:DocumentType, tag):
             doc.add_paragraph(line)
     return ''
 
-def handle_figure(doc:DocumentType, tag):
+def handle_figure(doc: DocumentType, tag):
     content = tag[1:-1]
     for item in content:
         if len(item) == 1:
-            doc.add_paragraph(item[0])
+            paragraph = doc.add_paragraph()
+            run = paragraph.add_run(item[0])
+            run.bold = True
+            run.font.size = Pt(14)  # Increase font size (14 is just an example, adjust as needed)
         else:
             if item[0].startswith('<Caption'):
-                doc.add_paragraph(f'Figure Caption: {item[1]}')
+                paragraph = doc.add_paragraph()
+                run = paragraph.add_run('Figure Caption: ')
+                run.bold = True
+                paragraph.add_run(item[1])
             else:
                 print("Can only handle captions...")
                 raise NotImplementedError(item)
