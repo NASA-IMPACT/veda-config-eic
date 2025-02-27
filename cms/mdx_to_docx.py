@@ -95,14 +95,13 @@ def docx_to_mdx(input_file, output_directory):
             file.write('\n'.join(current_content))
 
 def add_hyperlink(paragraph, url, text):
-    print(paragraph, url)
     # This function adds a hyperlink to a paragraph
     part = paragraph.part
     r_id = part.relate_to(url, RELATIONSHIP_TYPE.HYPERLINK, is_external=True)
 
     # Create the w:hyperlink tag and add needed values
     hyperlink = OxmlElement('w:hyperlink')
-    hyperlink.set(qn('r:id'), r_id, )
+    hyperlink.set(qn('r:id'), r_id)
 
     # Create a w:r element
     new_run = OxmlElement('w:r')
@@ -110,10 +109,24 @@ def add_hyperlink(paragraph, url, text):
     # Create a new w:rPr element
     rPr = OxmlElement('w:rPr')
 
-    # Add color if needed
+    # Add color and underline if needed
     c = OxmlElement('w:color')
     c.set(qn('w:val'), '0000FF')
-    return rPr
+    rPr.append(c)
+
+    # Add underline
+    u = OxmlElement('w:u')
+    u.set(qn('w:val'), 'single')
+    rPr.append(u)
+
+    # Join all the xml elements
+    new_run.append(rPr)
+    new_run.text = text
+    hyperlink.append(new_run)
+
+    # Add the hyperlink to the paragraph
+    paragraph._p.append(hyperlink)
+    return hyperlink
 
 
 if __name__ == '__main__':
