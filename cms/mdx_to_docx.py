@@ -1,8 +1,11 @@
 import os
 import re
+from typing import Dict, Callable
+
 ## https://python-docx.readthedocs.io/en/latest/user/install.html
 ## pip install python-docx
 from docx import Document
+from docx.document import Document as DocumentType
 from docx.oxml.shared import qn, OxmlElement
 from docx.opc.constants import RELATIONSHIP_TYPE
 
@@ -79,27 +82,75 @@ def mdx_to_docx(mdx_directory, output_file):
     
     doc.save(output_file)
 
-def docx_to_mdx(input_file, output_directory):
-    doc = Document(input_file)
-    current_file = None
-    current_content = []
+def render_content_to_doc(doc: DocumentType, content: str):
+    tag_handlers: Dict[str, Callable] = {
+        'Carousel': handle_carousel,
+        # Add more tag handlers here as needed
+    }
+
+    tags = split_content_into_tags(content)
+    print(tags)
+    import pdb; pdb.set_trace()
+
+def split_content_into_tags(content):
+    # Split content into parts, separating tags and text
+    parts = re.split(r'(<[^>]+>|</[^>]+>)', content)
     
-    for paragraph in doc.paragraphs:
-        if paragraph.style.name == 'Heading 1' and paragraph.text.startswith('FILE:'):
-            if current_file:
-                # Write the previous file
-                with open(os.path.join(output_directory, current_file), 'w') as file:
-                    file.write('\n'.join(current_content))
-            
-            current_file = paragraph.text.split(': ')[1]
-            current_content = []
-        else:
-            current_content.append(paragraph.text)
+    # Remove empty strings from the list
+    parts = [part.strip() for part in parts if part.strip()]
+
+    result = []
+    current_group = []
+    current_tag = None
+    for part in parts:
+        if part.endswith('/>'): 
+            if len(current_group) == 0:
+                result.append([part])
+            else:
+                current_group.append(part)
+            continue
+
+        current_group.append(part)
+
+        if current_tag is None:
+            if part.startswith('<') and not part.startswith('</'):
+                current_tag = part
+
+        if current_tag is not None:
+            # Closing tag
+            if part.startswith('</'):
+                # Matching closing tag found
+                #print(part, current_tag)
+                if part[2:-1] == current_tag[1:].split()[0].replace('>',''):
+                    result.append(current_group)
+                    current_group = []
+                    current_tag = None
+
+    # Add any remaining content
+    if len(current_group) > 0:
+        result.append(current_group)
+
+    return result
+
+def handle_carousel(doc: DocumentType, tag: str):
+    # Extract attributes from the tag
+    attributes = dict(re.findall(r'(\w+)="([^"]*)"', tag))
     
-    # Write the last file
-    if current_file:
-        with open(os.path.join(output_directory, current_file), 'w') as file:
-            file.write('\n'.join(current_content))
+    # Example: Read a companion file based on an attribute
+    if 'file' in attributes:
+        companion_file = attributes['file']
+        try:
+            with open(companion_file, 'r') as file:
+                carousel_content = file.read()
+                # Process the carousel content
+                doc.add_paragraph(f"Carousel content from {companion_file}:")
+                doc.add_paragraph(carousel_content)
+        except FileNotFoundError:
+            doc.add_paragraph(f"Error: Carousel file {companion_file} not found")
+    else:
+        doc.add_paragraph("Error: Carousel tag missing 'file' attribute")
+
+# Add more tag handlers as needed
 
 def add_hyperlink(paragraph, url, text):
     # This function adds a hyperlink to a paragraph
