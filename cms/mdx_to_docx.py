@@ -1,6 +1,8 @@
 import os
 import re
 from docx import Document
+from docx.oxml.shared import qn, OxmlElement
+from docx.opc.constants import RELATIONSHIP_TYPE
 
 def mdx_to_docx(mdx_directory, output_file):
     doc = Document()
@@ -15,13 +17,16 @@ def mdx_to_docx(mdx_directory, output_file):
                 
                 # Extract front matter
                 front_matter = re.search(r'---\n(.*?)\n---', content, re.DOTALL)
+                # Extract front matter
+                front_matter = re.search(r'---\n(.*?)\n---', content, re.DOTALL)
                 if front_matter:
                     front_matter_content = front_matter.group(1)
                     # List of keys to include
-                    keys_to_include = ['title', 'description']
+                    keys_to_include = ['title', 'description', 'id']
                     
                     # Parse front matter content
                     lines = front_matter_content.split('\n')
+                    id_value = None
                     i = 0
                     while i < len(lines):
                         line = lines[i].strip()
@@ -32,7 +37,6 @@ def mdx_to_docx(mdx_directory, output_file):
                             
                             # Check if the key is in the list of keys to include
                             if key in keys_to_include:
-                                print("Including", key)
                                 # Handle multi-line values
                                 if value == '"':
                                     i += 1
@@ -42,11 +46,20 @@ def mdx_to_docx(mdx_directory, output_file):
                                     if i < len(lines):
                                         value += ' ' + lines[i].strip()
                                 
-                                print("Extracted", value)
                                 # Remove surrounding quotes if present
                                 value = value.strip('"')
-                                doc.add_paragraph(f"{key.capitalize()}: {value}")
+                                
+                                if key == 'id':
+                                    id_value = value
+                                else:
+                                    doc.add_paragraph(f"{key.capitalize()}: {value}")
                         i += 1
+                    
+                    # Add the link if id was found
+                    if id_value is not None:
+                        p = doc.add_paragraph()
+                        add_hyperlink(p, f"https://earth.gov/stories/{id_value}", f"https://earth.gov/stories/{id_value}")
+                
                 
                 # Remove front matter from the content
                 if front_matter:
@@ -80,6 +93,28 @@ def docx_to_mdx(input_file, output_directory):
     if current_file:
         with open(os.path.join(output_directory, current_file), 'w') as file:
             file.write('\n'.join(current_content))
+
+def add_hyperlink(paragraph, url, text):
+    print(paragraph, url)
+    # This function adds a hyperlink to a paragraph
+    part = paragraph.part
+    r_id = part.relate_to(url, RELATIONSHIP_TYPE.HYPERLINK, is_external=True)
+
+    # Create the w:hyperlink tag and add needed values
+    hyperlink = OxmlElement('w:hyperlink')
+    hyperlink.set(qn('r:id'), r_id, )
+
+    # Create a w:r element
+    new_run = OxmlElement('w:r')
+
+    # Create a new w:rPr element
+    rPr = OxmlElement('w:rPr')
+
+    # Add color if needed
+    c = OxmlElement('w:color')
+    c.set(qn('w:val'), '0000FF')
+    return rPr
+
 
 if __name__ == '__main__':
     # Usage
