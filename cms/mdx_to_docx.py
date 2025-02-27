@@ -10,16 +10,17 @@ from docx.document import Document as DocumentType
 from docx.oxml.shared import qn, OxmlElement
 from docx.opc.constants import RELATIONSHIP_TYPE
 
-def mdx_to_docx(mdx_directory, output_file):
-    doc = Document()
+def mdx_to_docx(mdx_directory, output_file, doc = None):
+    if doc is None: doc = Document()
     
     for filename in os.listdir(mdx_directory):
         if filename.endswith('.mdx'):
+            if filename.split('.')[-2].startswith('introduction_'): continue
             with open(os.path.join(mdx_directory, filename), 'r') as file:
                 content = file.read()
                 
                 # Add a section marker
-                doc.add_heading(f"FILE: {filename}", level=1)
+                doc.add_heading(f"FILE: {os.path.join(mdx_directory,filename)}".replace('../',''), level=1)
                 
                 # Extract front matter
                 front_matter = re.search(r'---\n(.*?)\n---', content, re.DOTALL)
@@ -82,6 +83,7 @@ def mdx_to_docx(mdx_directory, output_file):
                 doc.add_page_break()
     
     doc.save(output_file)
+    return doc
 
 def render_content_to_doc(doc: DocumentType, content: str):
     ## get nested tags
@@ -274,4 +276,6 @@ def add_hyperlink(paragraph, url, text):
 
 if __name__ == '__main__':
     # Usage
-    mdx_to_docx('../stories', 'output.docx')
+    doc = mdx_to_docx('../overrides/home', 'output.docx')
+    doc = mdx_to_docx('../overrides', 'output.docx',doc)
+    doc = mdx_to_docx('../stories', 'earthDOTgov-content.docx',doc)
