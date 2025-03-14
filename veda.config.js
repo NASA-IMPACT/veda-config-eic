@@ -110,5 +110,12 @@ module.exports = {
     className: '',
     defaultIsOpen: false,
     contentId: 'gov-banner-content'
-  }
+  },
+  siteAlert: {
+    content: `TO BE REPLACED WITH GOVERNMENT SHUTDOWN TEXT`,
+    expires: '2026-08-03T12:00:00-04:00',
+    type: 'emergency',
+    slim: true,
+    showIcon: true
+  },
 };
