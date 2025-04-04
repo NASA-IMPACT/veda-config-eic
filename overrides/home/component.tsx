@@ -145,7 +145,7 @@ export default function HomeComponent() {
               Joining forces <span>for a better tomorrow</span>
             </StyledVarHeading>
             <p>
-            The EIC was created by NASA and is enabled by contributions across EPA, FEMA, NASA, NOAA, USAID, USDA and USGS.
+            The EIC was created by NASA and is enabled by contributions across EPA, FEMA, NASA, NOAA, USDA and USGS.
             </p>
             <Partners size="small" />
             <Button
