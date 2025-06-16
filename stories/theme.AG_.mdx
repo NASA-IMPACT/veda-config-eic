@@ -27,6 +27,7 @@ import { agricultureStoryIds } from "../overrides/common/story-data";
 
 import Carousel from "../overrides/common/embedded-video-carousel";
 import contentArray from './theme.AG_.introduction_agriculture/carousel_content.json';
+import narratedContentArray from './theme.AG_.introduction_agriculture/narrated_content.json';
 
 <Block>
   <Prose>
@@ -50,17 +51,17 @@ import contentArray from './theme.AG_.introduction_agriculture/carousel_content.
     </Figure>
 </Block>
 
-<Block type="wide">
+
+<Block type='wide'>
   <Figure>
-    <Embed
-      height="405"
-      src="https://www.youtube.com/embed/YbEV6vA-xgM"
-      title="NASA and Agriculture"
-    />
-    <Caption attrAuthor="NASA" attrUrl="https://nasa.gov/">
-      Learn how farmers use Earth science data to manage their crops, water their fields, and make decisions. 
-    </Caption>
+    <Carousel items={narratedContentArray} />
   </Figure>
+</Block>
+
+<Block type='wide'>
+  <Prose>
+    ## Related Data Visualizations
+  </Prose>
 </Block>
 
 <Block type='wide'>
