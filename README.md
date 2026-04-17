@@ -1,3 +1,6 @@
+> [!IMPORTANT]
+> **This repository is archived and no longer maintained.** It has been replaced by [NASA-IMPACT/next-earth-gov](https://github.com/NASA-IMPACT/next-earth-gov). Please direct all new work, issues, and pull requests there.
+
 # Welcome to the EIC dashboard
 
 This dashboard is organized around datasets and stories.
